@@ -8,7 +8,7 @@ session. The script prints the result and configuration path.
 
 ## Windows PowerShell
 
-From the extracted release directory or a Git checkout of this repository:
+Run these commands from the extracted release directory or a Git checkout.
 
 ```powershell
 py -3 -m venv .venv
@@ -25,7 +25,7 @@ on an Ubuntu server.
 
 ## Ubuntu desktop
 
-From the extracted release directory or a Git checkout of this repository:
+Run these commands from the extracted release directory or a Git checkout.
 
 ```bash
 bash install.sh --with-browser
@@ -58,8 +58,7 @@ use a configured SSH host alias.
 
 After sign-in, the script streams the new session over SSH to
 `autodl auth import` on the Ubuntu host. The host verifies it with AutoDL
-before saving it. Any previous local session remains available on your
-desktop. Check the remote login with:
+before saving it. Use `account me` over SSH to check the remote login.
 
 ```bash
 ssh USER@HOST '~/.local/bin/autodl --json account me'
