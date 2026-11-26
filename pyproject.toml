@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autodl-classic-agent"
+version = "0.7.0"
+description = "AutoDL GPU rentals from your terminal, Codex, and Claude Code"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "intqwq"}]
+keywords = ["autodl", "gpu", "rental", "mcp", "codex", "claude"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: System :: Distributed Computing",
+]
+dependencies = ["autodl-cli==0.1.0", "click2mcp==0.1.0", "mcp==2.3.0", "httpx[socks]==0.28.1"]
+
+[project.urls]
+Homepage = "https://github.com/intqwq/autodl-mcp-cli"
+Repository = "https://github.com/intqwq/autodl-mcp-cli"
+Issues = "https://github.com/intqwq/autodl-mcp-cli/issues"
+Changelog = "https://github.com/intqwq/autodl-mcp-cli/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+login = ["playwright==1.62.0"]
+dev = ["build>=1.2,<2", "twine>=6,<7"]
+
+[project.scripts]
+autodl = "autodl_classic_agent.cli:main"
+autodl-mcp = "autodl_classic_agent.server:main"
+autodl-agent = "autodl_classic_agent.cli:main"
+autodl-agent-mcp = "autodl_classic_agent.server:main"
+autodl-classic = "autodl_classic_agent.cli:main"
+autodl-classic-mcp = "autodl_classic_agent.server:main"
+
+[tool.setuptools.package-data]
+autodl_classic_agent = ["ipad_session.js"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

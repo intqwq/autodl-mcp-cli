@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "autodl": {
+      "type": "stdio",
+      "command": "/home/YOUR_USER/.local/bin/autodl-mcp",
+      "args": []
+    }
+  }
+}
