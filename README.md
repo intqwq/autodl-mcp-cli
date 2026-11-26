@@ -9,7 +9,7 @@
 
 An Ubuntu-friendly CLI and local stdio MCP server for **ordinary AutoDL GPU
 rentals**. Find machines, preview orders, rent instances, start and stop them,
-and save images. Sign in using only an iPad and SSH.
+and save images. Sign in from Windows, Ubuntu, or an iPad.
 
 This is an independent, unofficial project. It uses AutoDL's web-console
 endpoints through a pinned community backend; those endpoints can change.
@@ -28,9 +28,9 @@ sudo apt-get install -y python3-venv curl
 Download and install the versioned release:
 
 ```bash
-curl -fL https://github.com/intqwq/autodl-mcp-cli/releases/download/v0.7.0/autodl-0.7.0.tar.gz -o autodl-0.7.0.tar.gz
-tar -xzf autodl-0.7.0.tar.gz
-cd autodl-0.7.0
+curl -fL https://github.com/intqwq/autodl-mcp-cli/releases/download/v0.8.0/autodl-0.8.0.tar.gz -o autodl-0.8.0.tar.gz
+tar -xzf autodl-0.8.0.tar.gz
+cd autodl-0.8.0
 bash install.sh
 export PATH="$HOME/.local/bin:$PATH"
 autodl --version
@@ -45,19 +45,27 @@ Alternatively, install from source:
 ```bash
 git clone https://github.com/intqwq/autodl-mcp-cli.git
 cd autodl-mcp-cli
-git checkout v0.7.0
+git checkout v0.8.0
 bash install.sh
 ```
 
 For pipx users, the release also includes a standard Python wheel:
 
 ```bash
-pipx install 'https://github.com/intqwq/autodl-mcp-cli/releases/download/v0.7.0/autodl_classic_agent-0.7.0-py3-none-any.whl'
+pipx install 'https://github.com/intqwq/autodl-mcp-cli/releases/download/v0.8.0/autodl_classic_agent-0.8.0-py3-none-any.whl'
 ```
 
 Use one installation method. The Python distribution retains the name
 `autodl-classic-agent` for compatibility; the app commands are **`autodl`**
 and **`autodl-mcp`**.
+
+## Sign in from Windows or Ubuntu
+
+Run `autodl-desktop-login` on a computer with a desktop. Sign in on AutoDL's
+own login page. The script saves your session automatically after sign-in.
+Pass `--ssh USER@HOST` to verify and save it on the Ubuntu host running Codex.
+See the [desktop login manual](docs/DESKTOP_LOGIN.md) for PowerShell, Ubuntu,
+and manual transfer instructions.
 
 ## Sign in from an iPad
 
@@ -86,9 +94,6 @@ never paste it into an agent conversation, GitHub issue, or log.
 Credentials are stored in `~/.autodl-cli/config.toml` with mode `0600`.
 Run your agents under the same Unix user. `AUTODL_CLI_HOME` overrides that
 directory. A session can expire; repeat this login flow when required.
-
-Optional computer/browser login is available via `bash install.sh --with-browser`
-and `autodl auth login --browser` or `--headless`. The Safari flow is the default.
 
 ## Connect your agents
 

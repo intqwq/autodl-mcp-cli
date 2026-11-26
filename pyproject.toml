@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "autodl-classic-agent"
-version = "0.7.0"
+version = "0.8.0"
 description = "AutoDL GPU rentals from your terminal, Codex, and Claude Code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -37,6 +37,7 @@ dev = ["build>=1.2,<2", "twine>=6,<7"]
 
 [project.scripts]
 autodl = "autodl_classic_agent.cli:main"
+autodl-desktop-login = "autodl_classic_agent.desktop_login:main"
 autodl-mcp = "autodl_classic_agent.server:main"
 autodl-agent = "autodl_classic_agent.cli:main"
 autodl-agent-mcp = "autodl_classic_agent.server:main"

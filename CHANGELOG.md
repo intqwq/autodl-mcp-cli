@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0
+
+- Add `autodl-desktop-login` for Windows and Ubuntu. It signs in through a
+  fresh browser and verifies and saves the session locally or on an explicitly
+  selected Ubuntu SSH host.
+- Document desktop installation, interactive sign-in, and SSH session transfer.
+
 ## 0.7.0
 
 - Add `instance reset` and `autodl_instance_reset` for restoring the system

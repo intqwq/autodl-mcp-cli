@@ -159,12 +159,13 @@ def browser_proxy() -> dict | None:
     return proxy
 
 
-def browser_login(*, phone: str | None = None, password: str | None = None,
-                  visible: bool = False, timeout: float = 180, browser_path: str | None = None) -> dict:
+def capture_browser_session(*, phone: str | None = None, password: str | None = None,
+                            visible: bool = False, timeout: float = 180,
+                            browser_path: str | None = None) -> dict:
     try:
         from playwright.sync_api import sync_playwright, Error as BrowserError
     except ImportError:
-        raise LoginError("Install login support first: rerun install.sh --with-browser, or pip install '.[login]'.") from None
+        raise LoginError("Install browser support with install.sh --with-browser or python -m pip install \".[login]\".") from None
     if not visible and (not phone or not password):
         raise LoginError("Phone number and password are required for terminal login.")
     capture = SessionCapture()
@@ -220,9 +221,16 @@ def browser_login(*, phone: str | None = None, password: str | None = None,
                 browser.close()
     except BrowserError:
         raise LoginError(f"Browser login failed while {stage}. Use autodl auth login --ipad to avoid server-browser dependencies. No session was saved.") from None
-    progress("Verifying the session (20-second limit)...")
-    return verify_and_save({"token": capture.token, "app_version": capture.app_version or "v6.53.0",
-                            "device_fingerprint": capture.fingerprint})
+    return {"token": capture.token, "app_version": capture.app_version or "v6.53.0",
+            "device_fingerprint": capture.fingerprint}
+
+
+def browser_login(*, phone: str | None = None, password: str | None = None,
+                  visible: bool = False, timeout: float = 180, browser_path: str | None = None) -> dict:
+    session = capture_browser_session(phone=phone, password=password, visible=visible,
+                                      timeout=timeout, browser_path=browser_path)
+    print("Verifying the session (20-second limit)...", file=sys.stderr, flush=True)
+    return verify_and_save(session)
 
 
 def auth_command(args: list[str]) -> int:

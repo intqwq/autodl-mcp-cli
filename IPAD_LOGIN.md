@@ -65,6 +65,5 @@ creation commands while diagnosing authentication.
 ## Optional other login methods
 
 `autodl auth login --headless` retains the older server Chromium phone/password
-flow. `--browser` is for a computer with a display. Both are optional and no
-longer needed for iPad login. Browser mode now prints its current stage and
-uses explicit launch, navigation, field and verification time limits.
+flow. Windows and Ubuntu desktops can use [the desktop login script](docs/DESKTOP_LOGIN.md)
+to sign in locally or send a session to the Ubuntu host over SSH.

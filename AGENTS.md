@@ -21,10 +21,10 @@ application or Pro instance. Never ask for credentials in chat.
    match the exact UUID; `instance detail` describes configuration, not status.
 7. Stop interrupts the workload; release deletes the instance and its data.
    Preserve needed data and follow the user's instructions before releasing.
-8. The developer token used for the official Pro/Art APIs is not this tool's
-   login flow. Expired sessions require the user to sign in normally in iPad Safari and
-   import the session using the provided Shortcut and `autodl auth login`.
-   The default flow requires no Chromium or desktop on the server. Do not ask for account passwords or session exports in chat.
+8. Use ordinary AutoDL web sign-in for expired sessions. The user can run
+   `autodl-desktop-login` on Windows or Ubuntu and optionally pass `--ssh` to
+   save the session on the Codex host. The iPad Safari Shortcut and
+   `autodl auth login` remain available. Do not ask for passwords or sessions in chat.
 9. Use SSH separately for executing experiments and transferring results.
    Do not store secrets in project files, prompts or logs.
 10. Start with `instance monitor` to inspect usage. For CPU-only boot, request

@@ -22,14 +22,19 @@ esac
 if [[ $# -gt 1 ]]; then echo "Usage: bash install.sh [--with-browser]" >&2; exit 2; fi
 "$python_bin" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else "Python 3.11+ is required.")'
 mkdir -p -- "$install_root" "$bin_dir"
-for command in autodl autodl-mcp autodl-classic autodl-classic-mcp; do
+for command in autodl autodl-mcp autodl-classic autodl-classic-mcp autodl-desktop-login; do
     path="$bin_dir/$command"
     target="$install_root/venv/bin/$command"
     if [[ -e "$path" || -L "$path" ]]; then
         previous=""
         if [[ -L "$path" ]]; then previous="$(readlink -- "$path")"; fi
-        if [[ "$command" == "autodl" ]]; then stable="$install_root/venv/bin/autodl-agent"; else stable="$install_root/venv/bin/autodl-agent-mcp"; fi
-        if [[ ! -L "$path" || ( "$previous" != "$target" && "$previous" != "$stable" && "$previous" != "$old_art_root/venv/bin/$command" ) ]]; then
+        legacy="$old_art_root/venv/bin/$command"
+        case "$command" in
+            autodl) stable="$install_root/venv/bin/autodl-agent" ;;
+            autodl-desktop-login) stable="$target"; legacy="$target" ;;
+            *) stable="$install_root/venv/bin/autodl-agent-mcp" ;;
+        esac
+        if [[ ! -L "$path" || ( "$previous" != "$target" && "$previous" != "$stable" && "$previous" != "$legacy" ) ]]; then
             echo "Refusing to replace unrelated $path; set AUTODL_AGENT_BIN_DIR." >&2
             exit 1
         fi
@@ -39,7 +44,7 @@ done
 extra=""
 if "$with_browser"; then extra="[login]"; fi
 "$install_root/venv/bin/python" -m pip install --upgrade "$project_dir$extra"
-for command in autodl-classic autodl-classic-mcp; do
+for command in autodl-classic autodl-classic-mcp autodl-desktop-login; do
     ln -sfn -- "$install_root/venv/bin/$command" "$bin_dir/$command"
 done
 ln -sfn -- "$install_root/venv/bin/autodl-agent" "$bin_dir/autodl"
